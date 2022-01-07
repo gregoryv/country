@@ -1,6 +1,24 @@
 package country
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
+
+func Example_codeMethods() {
+	fmt.Println(SE.String())
+	fmt.Println(SE.Alpha2())
+	fmt.Println(SE.Alpha3())
+	fmt.Println(SE.Numeric())
+	fmt.Println(SE.Country())
+	// ouput:
+	// SE SWE 752 Sweden
+	// SE
+	// SWE
+	// 752
+	// Sweden
+
+}
 
 func TestCode(t *testing.T) {
 	if got := SE.Country(); got != "Sweden" {
