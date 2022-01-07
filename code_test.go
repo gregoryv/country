@@ -7,6 +7,10 @@ func TestCode(t *testing.T) {
 		t.Error("wrong country", got)
 	}
 
+	if got := SE.Alpha2(); got != "SE" {
+		t.Error("wrong alpha2", got)
+	}
+
 	if got := SE.Alpha3(); got != "SWE" {
 		t.Error("wrong alpha3", got)
 	}
