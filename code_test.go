@@ -36,4 +36,22 @@ func TestCode(t *testing.T) {
 	if got := SE.Numeric(); got != 752 {
 		t.Error("wrong numeric", got)
 	}
+
+	bad := Code(9999)
+	if got := bad.Country(); got != "undefined" {
+		t.Error("wrong country", got)
+	}
+
+	if got := bad.Alpha2(); got != "undefined" {
+		t.Error("wrong alpha2", got)
+	}
+
+	if got := bad.Alpha3(); got != "undefined" {
+		t.Error("wrong alpha3", got)
+	}
+
+	if got := bad.Numeric(); got != -1 {
+		t.Error("wrong numeric", got)
+	}
+
 }

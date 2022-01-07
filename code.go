@@ -263,15 +263,46 @@ const (
 	ZM             // ZM ZMB 894 Zambia
 	ZW             // ZW ZWE 716 Zimbabwe
 	AX             // AX ALA 248 Åland Islands
+
+	last // here so we can handle bad codes, ie. Code(9999)
 )
 
-func (c Code) Alpha2() string { return c.String()[:2] }
-func (c Code) Alpha3() string { return c.String()[3:6] }
+// Alpha2 returns the two letter string of a country
+func (c Code) Alpha2() string {
+	if !c.isValid() {
+		return "undefined"
+	}
+	return c.String()[:2]
+}
+
+// Alpha3 returns the three letter string of a country
+func (c Code) Alpha3() string {
+	if !c.isValid() {
+		return "undefined"
+	}
+	return c.String()[3:6]
+}
+
+// Numeric returns the numeric code of a country
 func (c Code) Numeric() int {
+	if !c.isValid() {
+		return -1
+	}
 	v, err := strconv.Atoi(c.String()[7:10])
 	if err != nil {
 		log.Fatal(err, c.String())
 	}
 	return v
 }
-func (c Code) Country() string { return c.String()[11:] }
+
+func (c Code) isValid() bool {
+	return c >= 0 && c < last
+}
+
+// Country returns the name of a country
+func (c Code) Country() string {
+	if !c.isValid() {
+		return "undefined"
+	}
+	return c.String()[11:]
+}
